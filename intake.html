@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LORUNEI — Post-Payment Intake</title>
+<meta name="description" content="Post-payment intake form for LORUNEI travel research and advisory services.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.intake-wrap{max-width:980px;margin:105px auto 70px;padding:0 22px}
+.intake-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:30px}
+.lang-switch-inline{display:flex;gap:6px;align-items:center;font-weight:800}
+.lang-switch-inline button{border:0;background:none;font-weight:800;padding:8px 6px;cursor:pointer;color:#667085}
+.lang-switch-inline button.active{color:#b42318}
+.stepbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}
+.step{padding:8px 11px;border-radius:999px;background:#f3f4f6;color:#667085;font-weight:700;font-size:.9rem}
+.step.active{background:#17233c;color:#fff}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:24px;margin:18px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:7px;font-weight:700}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid #cfd4dc;border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:115px;resize:vertical}
+.plansec{display:none} .plansec.active{display:block}
+.notice{padding:15px;border-radius:12px;background:#f8fafc;border:1px solid #e5e7eb;color:#475467}
+.success{display:none;padding:22px;border-radius:14px;background:#f7f4ed;border:1px solid #e5e1d7;margin-top:18px}
+.success.show{display:block}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.small{font-size:.9rem;color:#667085;font-weight:400}
+@media(max-width:700px){
+  .intake-head{flex-direction:column}
+  .grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<main class="intake-wrap">
+<header class="intake-head">
+  <div>
+    <p><strong data-t="eyebrow">POST-PAYMENT INTAKE</strong></p>
+    <h1 data-t="title">Tell us about your Japan trip.</h1>
+    <p data-t="intro">Complete this form after payment. We use your answers to prepare your delivery. Individualized research begins when LORUNEI sends the work-start confirmation email.</p>
+  </div>
+  <div class="lang-switch-inline" aria-label="Language">
+    <button type="button" data-lang="en" class="active">EN</button><span>/</span>
+    <button type="button" data-lang="ja">日本語</button>
+  </div>
+</header>
+
+<div class="stepbar" aria-label="Order flow">
+  <span class="step">1. <span data-t="s1">Choose plan</span></span>
+  <span class="step">2. <span data-t="s2">Pay with Stripe</span></span>
+  <span class="step active">3. <span data-t="s3">Send trip details</span></span>
+  <span class="step">4. <span data-t="s4">Receive your delivery</span></span>
+</div>
+
+<form id="intakeForm" action="https://formspree.io/f/mjyvgqad" method="POST"><input type="hidden" name="reference_id" id="intakeReferenceId">
+<input type="hidden" name="submitted_at" id="intakeSubmittedAt">
+<input type="hidden" name="subject" id="intakeSubject" value="LORUNEI intake"><input type="hidden" name="form_type" value="Post-payment intake">
+<section class="card">
+  <h2 data-t="purchase">Purchase details</h2>
+  <div class="grid">
+    <label>
+      <span data-t="plan">Purchased plan</span>
+      <select id="plan" name="plan" required>
+        <option value="">—</option>
+        <option value="quick">Quick Help — $49</option>
+        <option value="answer">Japan Answer — $99</option>
+        <option value="research">Japan Research — $299</option>
+        <option value="private">Private Japan Planning — from $999</option>
+      </select>
+    </label>
+    <label>
+      <span data-t="order">Stripe receipt / order reference</span>
+      <input name="order_reference" placeholder="Optional">
+      <span class="small" data-t="orderHelp">If available, paste the Stripe receipt or payment reference.</span>
+    </label>
+  </div>
+</section>
+
+<section class="card">
+  <h2 data-t="basics">About you & your trip</h2>
+  <div class="grid">
+    <label><span data-t="name">Name</span><input name="name" required></label>
+    <label><span data-t="email">Email</span><input name="email" type="email" required></label>
+    <label><span data-t="dates">Travel dates</span><input name="dates" placeholder="e.g. Oct 10–18, 2026"></label>
+    <label><span data-t="travelers">Travelers / ages</span><input name="travelers"></label>
+    <label><span data-t="firstVisit">Is this your first trip to Japan?</span><select name="first_visit"><option value="first" data-t="firstYes">Yes, first trip</option><option value="repeat" data-t="firstNo">No, we have visited before</option><option value="unsure" data-t="firstUnsure">Not sure / mixed group</option></select></label>
+    <label class="full"><span data-t="cities">Cities / regions</span><input name="cities"></label>
+    <label><span data-t="budget">Approximate trip budget</span><input name="budget" placeholder="USD / JPY"></label>
+    <label class="full"><span data-t="interests">Interests</span><textarea name="interests"></textarea></label>
+    <label class="full"><span data-t="avoid">Anything you want to avoid?</span><textarea name="avoid"></textarea></label>
+  </div>
+</section>
+
+<section class="card plansec" data-plan-section="quick">
+  <h2 data-t="quickTitle">Quick Help — one focused topic, up to 3 related questions</h2>
+  <p data-t="quickIntro">No appointment or video call is required. Tell us one focused Japan travel topic and up to 3 closely related questions, plus the context that matters. We’ll provide a written answer, usually within 2 business days. If Japan Answer is clearly a better fit, we’ll tell you before deeper work begins; you can keep Quick Help scope or apply the full $49 toward Japan Answer.</p>
+  <div class="grid">
+    <label class="full"><span data-t="q1">Main question</span><textarea name="quick_q1" required></textarea></label>
+    <label class="full"><span data-t="q2">Related question 2 (optional)</span><textarea name="quick_q2"></textarea></label>
+    <label class="full"><span data-t="q3">Related question 3 (optional)</span><textarea name="quick_q3"></textarea></label>
+    <label class="full"><span data-t="context">Context, priorities or constraints</span><textarea name="quick_context"></textarea></label>
+  </div>
+</section>
+
+<section class="card plansec" data-plan-section="answer">
+  <h2 data-t="answerTitle">Japan Answer — one focused request</h2>
+  <div class="grid">
+    <label class="full"><span data-t="answerQuestion">Your question or decision</span><textarea name="answer_question"></textarea></label>
+    <label class="full"><span data-t="answerContext">Useful context</span><textarea name="answer_context"></textarea></label>
+    <label class="full"><span data-t="answerConstraints">Priorities, budget or constraints</span><textarea name="answer_constraints"></textarea></label>
+  </div>
+</section>
+
+<section class="card plansec" data-plan-section="research">
+  <h2 data-t="researchTitle">Japan Research — deeper comparison & research</h2>
+  <div class="grid">
+    <label class="full"><span data-t="researchTopic">What should we research?</span><textarea name="research_topic"></textarea></label>
+    <label class="full"><span data-t="researchOptions">Options already under consideration</span><textarea name="research_options"></textarea></label>
+    <label class="full"><span data-t="researchPriorities">What matters most in the decision?</span><textarea name="research_priorities"></textarea></label>
+  </div>
+</section>
+
+<section class="card plansec" data-plan-section="private">
+  <h2 data-t="privateTitle">Private Japan Planning — custom journey planning</h2>
+  <div class="grid">
+    <label><span data-t="pace">Preferred pace</span><input name="private_pace"></label>
+    <label><span data-t="style">Preferred travel style</span><input name="private_style"></label>
+    <label class="full"><span data-t="mustdo">Must-do experiences / places</span><textarea name="private_mustdo"></textarea></label>
+    <label class="full"><span data-t="food">Food preferences / allergies</span><textarea name="private_food"></textarea></label>
+    <label class="full"><span data-t="mobility">Mobility / accessibility considerations</span><textarea name="private_mobility"></textarea></label>
+    <label class="full"><span data-t="special">Special occasions / important dates</span><textarea name="private_special"></textarea></label>
+    <label class="full"><span data-t="concierge">What would make the planning especially useful?</span><textarea name="private_goals"></textarea></label>
+  </div>
+</section>
+
+<section class="card">
+  <h2 data-t="final">Final details</h2>
+  <label><span data-t="links">Useful links</span><textarea name="links" placeholder="Hotel links, saved maps, restaurants, flight info..."></textarea></label>
+  <label><span data-t="notes">Anything else?</span><textarea name="notes"></textarea></label>
+  <div class="notice" style="margin-top:16px" data-t="privacy">Do not include passport numbers, card details, passwords, or other sensitive credentials.</div>
+  <div class="actions">
+    <button class="button" type="submit" data-t="submit">Send trip details</button>
+    <a class="button button-secondary" href="index.html" data-t="back">Back to site</a>
+  </div>
+  <p id="status" class="small" aria-live="polite"></p>
+
+  <p id="intakeSubmitStatus" class="small" aria-live="polite"></p>
+<div id="intakeReceipt" class="submission-receipt" hidden>
+<strong id="intakeReceiptTitle">Submission received</strong>
+<div><span id="intakeReceiptRefLabel">Reference:</span> <code id="intakeReceiptRef"></code></div>
+<div><span id="intakeReceiptTimeLabel">Submitted:</span> <span id="intakeReceiptTime"></span></div>
+<p id="intakeReceiptTip">Please keep this reference number. Use the buttons below to save or copy your submission for later.</p>
+<pre id="intakeReceiptCopy" class="receipt-copy"></pre>
+<div class="receipt-actions">
+  <button type="button" class="button button-secondary" id="intakeSaveReceipt">Save a copy (.txt)</button>
+  <button type="button" class="button button-ghost" id="intakeCopyReceipt">Copy</button>
+</div>
+</div><div id="success" class="success" aria-live="polite">
+    <h3 data-t="successTitle">Your trip details have been received.</h3>
+    <p data-t="successText">After we confirm your payment and required details, LORUNEI will send a work-start confirmation email. Individualized research begins when that email is sent. Quick Help is usually delivered by email within 2 business days after the information needed to begin is received.</p>
+  </div>
+</section>
+</form>
+</main>
+
+<script>
+const CONTACT_EMAIL = "infolorunei@gmail.com";
+
+const copy = {
+  en: {
+    eyebrow:"POST-PAYMENT INTAKE", title:"Tell us about your Japan trip.",
+    intro:"Complete this form after payment. We use your answers to prepare your delivery. Individualized research begins when LORUNEI sends the work-start confirmation email.",
+    s1:"Choose plan", s2:"Pay with Stripe", s3:"Send trip details", s4:"Receive your delivery",
+    purchase:"Purchase details", plan:"Purchased plan", order:"Stripe receipt / order reference",
+    orderHelp:"If available, paste the Stripe receipt or payment reference.",
+    basics:"About you & your trip", name:"Name", email:"Email", dates:"Travel dates",
+    travelers:"Travelers / ages", firstVisit:"Is this your first trip to Japan?", firstYes:"Yes, first trip", firstNo:"No, we have visited before", firstUnsure:"Not sure / mixed group", cities:"Cities / regions", budget:"Approximate trip budget",
+    interests:"Interests", avoid:"Anything you want to avoid?",
+    quickTitle:"Quick Help — one focused topic, up to 3 related questions",
+    quickIntro:"No appointment or video call is required. Tell us one focused Japan travel topic and up to 3 closely related questions, plus the context that matters. We’ll provide a written answer, usually within 2 business days. If Japan Answer is clearly a better fit, we’ll tell you before deeper work begins; you can keep Quick Help scope or apply the full $49 toward Japan Answer.",
+    q1:"Main question", q2:"Related question 2 (optional)", q3:"Related question 3 (optional)", context:"Context, priorities or constraints",
+    answerTitle:"Japan Answer — one focused request", answerQuestion:"Your question or decision",
+    answerContext:"Useful context", answerConstraints:"Priorities, budget or constraints",
+    researchTitle:"Japan Research — deeper comparison & research", researchTopic:"What should we research?",
+    researchOptions:"Options already under consideration", researchPriorities:"What matters most in the decision?",
+    privateTitle:"Private Japan Planning — custom journey planning", pace:"Preferred pace", style:"Preferred travel style",
+    mustdo:"Must-do experiences / places", food:"Food preferences / allergies",
+    mobility:"Mobility / accessibility considerations", special:"Special occasions / important dates",
+    concierge:"What would make the planning especially useful?", final:"Final details", links:"Useful links",
+    notes:"Anything else?", privacy:"Do not include passport numbers, card details, passwords, or other sensitive credentials.",
+    submit:"Send trip details", back:"Back to site",
+    status:"Your trip details will be sent directly from this page.",
+    successTitle:"Your trip details have been received.",
+    successText:"After we confirm your payment and required details, LORUNEI will send a work-start confirmation email. Individualized research begins when that email is sent. Quick Help is usually delivered by email within 2 business days after the information needed to begin is received."
+  },
+  ja: {
+    eyebrow:"お支払い後フォーム", title:"日本旅行について教えてください。",
+    intro:"決済後にご入力ください。いただいた内容をもとに納品準備を進めます。個別リサーチは、LORUNEIが作業開始確認メールを送信した時点で開始します。",
+    s1:"プランを選ぶ", s2:"Stripeで決済", s3:"旅行情報を送る", s4:"納品を受け取る",
+    purchase:"購入情報", plan:"購入済みプラン", order:"Stripe領収書 / 注文番号",
+    orderHelp:"お持ちの場合はStripeの領収書番号や決済番号を入力してください。",
+    basics:"お客様と旅行について", name:"お名前", email:"メールアドレス", dates:"旅行日程",
+    travelers:"人数 / 年齢層", firstVisit:"日本旅行は初めてですか？", firstYes:"はい、初めてです", firstNo:"いいえ、訪日経験があります", firstUnsure:"未定 / 初訪日と経験者の混成", cities:"訪問予定の都市・地域", budget:"旅行のおおよその予算",
+    interests:"興味・好きなこと", avoid:"避けたいことはありますか？",
+    quickTitle:"クイックヘルプ｜1テーマ・関連質問3つまで",
+    quickIntro:"予約・ビデオ通話は不要です。相談したい1つのテーマについて、関連する質問を3つまでと、判断に必要な背景をお送りください。通常2営業日以内を目安に文章で回答します。ジャパン・アンサーの方が明らかに適している場合は、深い作業前にお知らせし、クイックヘルプの範囲に収めるか49ドル全額をジャパン・アンサーへ充当できます。",
+    q1:"中心となる質問", q2:"関連質問2（任意）", q3:"関連質問3（任意）", context:"背景・重視すること・条件",
+    answerTitle:"ジャパン・アンサー｜1つのテーマを個別に回答", answerQuestion:"質問・判断したいこと",
+    answerContext:"参考になる背景情報", answerConstraints:"重視すること・予算・条件",
+    researchTitle:"ジャパン・リサーチ｜より深い比較・リサーチ", researchTopic:"何を調べてほしいですか？",
+    researchOptions:"すでに検討している候補", researchPriorities:"判断で重視すること",
+    privateTitle:"プライベート・ジャパン・プランニング｜旅行全体の個別プランニング",
+    pace:"旅行のペース", style:"好みの旅行スタイル",
+    mustdo:"絶対に行きたい場所・やりたいこと", food:"食事の好み・アレルギー",
+    mobility:"移動・バリアフリー等の配慮事項", special:"記念日・重要な日",
+    concierge:"どんなプランニングだと特に役立ちますか？", final:"最後に",
+    links:"参考リンク", notes:"その他",
+    privacy:"パスポート番号、カード情報、パスワードなどの重要情報は入力しないでください。",
+    submit:"旅行情報を送信", back:"サイトへ戻る",
+    status:"このページから旅行情報を直接送信します。",
+    successTitle:"旅行情報を受け付けました。",
+    successText:"決済と開始に必要な情報を確認後、LORUNEIから作業開始確認メールを送信します。個別リサーチは、そのメールを送信した時点で開始します。クイックヘルプは、開始に必要な情報の受領後、通常2営業日以内を目安にメールで納品します。"
+  },
+};
+
+let lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("loruneiLang") ;
+if (!["en","ja"].includes(lang)) {
+  lang = navigator.language.toLowerCase().startsWith("ja") ? "ja" : "en";
+}
+
+function applyLang(next) {
+  if (!["en","ja"].includes(next)) next = "en";
+  lang = next;
+  localStorage.setItem("loruneiLang", next);
+  
+  document.documentElement.lang = next;
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const k = el.dataset.t;
+    if (copy[next][k]) el.textContent = copy[next][k];
+  });
+  document.querySelectorAll("[data-lang]").forEach(b => b.classList.toggle("active", b.dataset.lang === next));
+}
+
+const plan = document.getElementById("plan");
+function applyPlan() {
+  document.querySelectorAll("[data-plan-section]").forEach(section => {
+    const active = section.dataset.planSection === plan.value;
+    section.classList.toggle("active", active);
+    section.querySelectorAll("input, textarea, select").forEach(field => {
+      if (!active) {
+        if (field.required) field.dataset.requiredWhenActive = "true";
+        field.required = false;
+        field.disabled = true;
+      } else {
+        field.disabled = false;
+        if (field.dataset.requiredWhenActive === "true") field.required = true;
+      }
+    });
+  });
+}
+plan.addEventListener("change", applyPlan);
+
+const qp = new URLSearchParams(location.search).get("plan");
+if (["quick","answer","research","private"].includes(qp)) {
+  plan.value = qp;
+}
+applyPlan();
+
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+
+document.getElementById("intakeForm").addEventListener("submit", async function(e){
+  const now=new Date();
+  const selectedPlan=(document.getElementById("plan").value||new URLSearchParams(location.search).get("plan")||"general").toUpperCase();
+  const prefixMap={QUICK:"QH",ANSWER:"ANS",RESEARCH:"RES",PRIVATE:"PRI"};
+  const prefix=prefixMap[selectedPlan]||selectedPlan.slice(0,3);
+  const stamp=now.toISOString().slice(0,10).replaceAll("-","");
+  const rand=Math.random().toString(36).slice(2,7).toUpperCase();
+  const ref="LOR-"+prefix+"-"+stamp+"-"+rand;
+  document.getElementById("intakeReferenceId").value=ref;
+  document.getElementById("intakeSubmittedAt").value=now.toISOString();
+  document.getElementById("intakeSubject").value="LORUNEI "+selectedPlan+" "+ref;
+  const submittedLines=[];
+  [...e.currentTarget.elements].forEach(el=>{
+    if(el.disabled || !el.name || ["hidden","submit","button"].includes(el.type)) return;
+    let value="";
+    if(el.tagName==="SELECT") value=el.options[el.selectedIndex]?.text||"";
+    else value=el.value||"";
+    if(!String(value).trim()) return;
+    const label=el.closest("label");
+    const labelNode=label?.querySelector("[data-t]");
+    const labelText=labelNode?.textContent?.trim()||el.name;
+    submittedLines.push(labelText+": "+value);
+  });
+
+  e.preventDefault();
+  const form=e.currentTarget;
+  const langNow=(localStorage.getItem("loruneiLang")||document.documentElement.lang||"en")==="ja"?"ja":"en";
+  const msg={
+    en:{sending:"Sending…",ok:"Thank you. Your trip details have been sent to LORUNEI.",err:"We couldn't send the form. Please try again or email infolorunei@gmail.com."},
+    ja:{sending:"送信中…",ok:"ありがとうございます。旅行情報をLORUNEIへ送信しました。",err:"送信できませんでした。もう一度お試しいただくか、infolorunei@gmail.com までメールでご連絡ください。"}
+  };
+  const c=msg[langNow]||msg.en;
+  const status=document.getElementById("intakeSubmitStatus");
+  const btn=form.querySelector('[type="submit"]');
+  if(status)status.textContent=c.sending;
+  if(btn)btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{method:"POST",body:new FormData(form),headers:{"Accept":"application/json"}});
+    if(res.ok){
+      if(status)status.textContent=c.ok;
+      const receipt=document.getElementById("intakeReceipt");
+      document.getElementById("intakeReceiptRef").textContent=ref;
+      document.getElementById("intakeReceiptTime").textContent=now.toLocaleString(langNow==="ja"?"ja-JP":"en-US");
+      document.getElementById("intakeReceiptTitle").textContent=langNow==="ja"?"送信を受け付けました":"Submission received";
+      document.getElementById("intakeReceiptRefLabel").textContent=langNow==="ja"?"受付番号：":"Reference:";
+      document.getElementById("intakeReceiptTimeLabel").textContent=langNow==="ja"?"送信日時：":"Submitted:";
+      document.getElementById("intakeReceiptTip").textContent=langNow==="ja"?"受付番号と送信内容の控えを保存しておくことをおすすめします。下のボタンから保存またはコピーできます。":"We recommend saving your reference number and submission. Use the buttons below to save or copy it for later.";
+      const receiptText=[
+        "LORUNEI",
+        (langNow==="ja"?"受付番号":"Reference")+": "+ref,
+        (langNow==="ja"?"送信日時":"Submitted")+": "+now.toLocaleString(langNow==="ja"?"ja-JP":"en-US"),
+        "",
+        ...submittedLines
+      ].join("\n");
+      document.getElementById("intakeReceiptCopy").textContent=receiptText;
+      const saveBtn=document.getElementById("intakeSaveReceipt");
+      const copyBtn=document.getElementById("intakeCopyReceipt");
+      saveBtn.textContent=langNow==="ja"?"控えを保存（.txt）":"Save a copy (.txt)";
+      copyBtn.textContent=langNow==="ja"?"控えをコピー":"Copy";
+      saveBtn.onclick=()=>{
+        const blob=new Blob([receiptText],{type:"text/plain;charset=utf-8"});
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement("a");
+        a.href=url;
+        a.download=ref+".txt";
+        a.click();
+        setTimeout(()=>URL.revokeObjectURL(url),500);
+      };
+      copyBtn.onclick=async()=>{
+        try{
+          await navigator.clipboard.writeText(receiptText);
+          copyBtn.textContent=langNow==="ja"?"コピーしました":"Copied";
+          setTimeout(()=>copyBtn.textContent=langNow==="ja"?"控えをコピー":"Copy",1600);
+        }catch(_){
+          copyBtn.textContent=langNow==="ja"?"コピーできませんでした":"Copy failed";
+        }
+      };
+      receipt.hidden=false;
+      document.getElementById("success")?.classList.add("show");
+      form.reset();
+      if(typeof applyPlan==="function")applyPlan();
+    }else{
+      if(status)status.textContent=c.err;
+    }
+  }catch(err){
+    if(status)status.textContent=c.err;
+  }finally{
+    if(btn)btn.disabled=false;
+  }
+});
+
+applyLang(lang);
+applyPlan();
+</script>
+<span class="site-build-version" aria-label="site build">v1</span>
+</body>
+</html>

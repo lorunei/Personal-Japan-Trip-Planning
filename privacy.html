@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy | LORUNEI</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.doc{max-width:900px;margin:100px auto 70px;padding:0 22px;line-height:1.85}
+.doc h2{margin-top:30px}
+.doc-lang{display:flex;gap:8px;align-items:center;margin:24px 0}
+.doc-lang button{border:0;background:none;font-weight:800;padding:8px;cursor:pointer}
+.doc-lang button.active{color:#b42318}
+.doc-panel{display:none}.doc-panel.active{display:block}
+.updated{color:#667085}
+</style>
+</head>
+<body>
+<main class="doc">
+<a href="index.html">← LORUNEI</a>
+<div class="doc-lang" aria-label="Language switcher"><button data-doc-lang="en" class="active">EN</button>/<button data-doc-lang="ja">日本語</button></div>
+
+<section class="doc-panel active" data-doc-panel="en">
+<h1>Privacy Policy</h1><p class="updated">Last updated: August 25, 2026</p>
+<h2>Information we collect</h2><p>We may collect your name, email address, travel dates, destinations, interests, budget, dietary preferences, accessibility needs and other information you choose to provide for travel research and customer support.</p>
+<h2>Do not send sensitive credentials</h2><p>Please do not send passport numbers, payment card numbers, passwords, government ID numbers or other sensitive credentials through our inquiry or intake forms.</p>
+<h2>Travel companions</h2><p>If you provide information about another traveler, you are responsible for having an appropriate basis to share that information with us.</p>
+<h2>How we use information</h2><p>We use information to answer inquiries, confirm scope, provide purchased services, communicate about delivery and refunds, maintain business records and improve our service.</p>
+<h2>Service providers</h2><p>We use or may use service providers such as Formspree for form submissions, Stripe for payment processing, and email/hosting providers to operate the service. Their own privacy terms apply to information they process.</p>
+<h2>International processing</h2><p>Some service providers may process information outside your country of residence.</p>
+<h2>Retention</h2><p>We keep customer information only as long as reasonably necessary for service delivery, customer support, accounting, dispute handling and legal obligations. Retention periods may differ by record type.</p>
+<h2>Your requests</h2><p>You may contact us to request access, correction or deletion where applicable. Contact: infolorunei@gmail.com.</p>
+</section>
+
+<section class="doc-panel" data-doc-panel="ja">
+<h1>プライバシーポリシー</h1><p class="updated">最終更新日：2026年8月25日</p>
+<h2>取得する情報</h2><p>氏名、メールアドレス、旅行日程、訪問先、興味、予算、食事の希望、移動上の配慮事項など、旅行リサーチや顧客対応に必要な範囲でお客様が提供する情報を取得する場合があります。</p>
+<h2>重要な認証情報は送らないでください</h2><p>パスポート番号、カード番号、パスワード、公的身分証番号その他の重要な認証情報は、問い合わせフォームや質問フォームから送信しないでください。</p>
+<h2>同行者情報</h2><p>同行者に関する情報を提供する場合、お客様の責任で適切に共有できる情報のみをご提供ください。</p>
+<h2>利用目的</h2><p>お問い合わせ対応、サービス範囲確認、購入サービスの提供、納品・返金等の連絡、事業上の記録、サービス改善に利用します。</p>
+<h2>外部サービス</h2><p>フォーム送信にFormspree、決済処理にStripe、その他メール・ホスティング等の外部サービスを利用または利用予定です。各サービスが処理する情報には、それぞれのプライバシー条件が適用されます。</p>
+<h2>国外での処理</h2><p>利用する外部サービスによっては、お客様の居住国以外で情報が処理される場合があります。</p>
+<h2>保管期間</h2><p>サービス提供、顧客対応、会計、紛争対応、法令上の義務に合理的に必要な期間のみ保管します。記録の種類により期間は異なります。</p>
+<h2>開示・訂正・削除等</h2><p>適用される範囲で、情報の確認・訂正・削除等をご希望の場合は infolorunei@gmail.com までご連絡ください。</p>
+</section>
+</main>
+<script>
+(function(){
+  const allowed=["en","ja"];
+  const buttons=document.querySelectorAll("[data-doc-lang]");
+  const panels=document.querySelectorAll("[data-doc-panel]");
+  function show(lang){
+    if(!allowed.includes(lang)) lang="en";
+    buttons.forEach(b=>b.classList.toggle("active",b.dataset.docLang===lang));
+    panels.forEach(p=>p.classList.toggle("active",p.dataset.docPanel===lang));
+    document.documentElement.lang=lang;
+  }
+  buttons.forEach(b=>b.addEventListener("click",()=>show(b.dataset.docLang)));
+  const requested=new URLSearchParams(location.search).get("lang");
+  const stored=localStorage.getItem("japanInsiderLang");
+  show(allowed.includes(requested)?requested:(allowed.includes(stored)?stored:"en"));
+})();
+</script>
+<span class="site-build-version" aria-label="site build">v1</span>
+</body></html>

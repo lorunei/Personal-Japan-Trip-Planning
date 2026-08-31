@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Payment received | LORUNEI</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.thanks{max-width:760px;margin:90px auto;padding:0 22px;line-height:1.8}
+.thanks-card{padding:30px;border:1px solid #e5e7eb;border-radius:18px;background:#fff}
+.thanks .lang-switch{margin:0 0 20px}
+.thanks .steps{padding-left:22px}
+.thanks .button{margin-top:12px}
+.thanks .muted{color:#667085}
+</style>
+</head>
+<body>
+<main class="thanks">
+  <div class="lang-switch" aria-label="Language switcher">
+    <button type="button" data-lang="en" class="lang-btn active">EN</button><span>/</span>
+    <button type="button" data-lang="ja" class="lang-btn">日本語</button>
+  </div>
+  <section class="thanks-card">
+    <p class="eyebrow" data-t="eyebrow">PAYMENT RECEIVED</p>
+    <h1 data-t="title">Thank you.</h1>
+    <p data-t="intro">Your payment is complete. Please allow 5–8 minutes now to send the trip details we need before work can begin.</p>
+    <ol class="steps">
+      <li data-t="s1">Complete the client intake form.</li>
+      <li data-t="s2">Keep the reference number and save a copy of your submission.</li>
+      <li data-t="s3">We confirm your payment and required details by email.</li>
+      <li data-t="s4">Individualized research begins when we send the work-start confirmation email.</li>
+      <li data-t="s5">Quick Help is usually delivered by email within 2 business days after the information needed to begin is received.</li>
+    </ol>
+    <a class="button" id="intakeLink" href="intake.html?plan=quick" data-t="cta">Continue to trip details</a>
+    <p class="muted" data-t="note">If you already submitted your intake, you do not need to send it again.</p>
+  </section>
+</main>
+<span class="site-build-version" aria-label="site build">v1</span>
+<script>
+const copy={
+  en:{
+    eyebrow:"PAYMENT RECEIVED",title:"Thank you.",
+    intro:"Your payment is complete. Please allow 5–8 minutes now to send the trip details we need before work can begin.",
+    s1:"Complete the client intake form.",
+    s2:"Keep the reference number and save a copy of your submission.",
+    s3:"We confirm your payment and required details by email.",
+    s4:"Individualized research begins when we send the work-start confirmation email.",
+    s5:"Quick Help is usually delivered by email within 2 business days after the information needed to begin is received.",
+    cta:"Continue to trip details",
+    note:"If you already submitted your intake, you do not need to send it again."
+  },
+  ja:{
+    eyebrow:"お支払いを受け付けました",title:"ありがとうございます。",
+    intro:"お支払いが完了しました。作業開始に必要な旅行情報の入力に、このまま5〜8分ほどお時間をください。",
+    s1:"購入後フォームに旅行情報を入力します。",
+    s2:"送信後に表示される受付番号と控えを保存します。",
+    s3:"LORUNEIから、お支払いと必要情報をメールで確認します。",
+    s4:"作業開始確認メールを送信した時点で、個別リサーチを開始します。",
+    s5:"Quick Helpは、開始に必要な情報の受領後、通常2営業日以内を目安にメールで回答します。",
+    cta:"旅行情報を入力する",
+    note:"すでに購入後フォームを送信済みの場合、再送する必要はありません。"
+  }
+};
+const params=new URLSearchParams(location.search);
+let lang=params.get("lang")||localStorage.getItem("loruneiLang");
+if(!["en","ja"].includes(lang)) lang=(navigator.language||"").toLowerCase().startsWith("ja")?"ja":"en";
+function apply(l){
+  if(!["en","ja"].includes(l)) l="en";
+  lang=l; localStorage.setItem("loruneiLang",l);  document.documentElement.lang=l;
+  document.querySelectorAll("[data-t]").forEach(el=>{const v=copy[l][el.dataset.t];if(v!==undefined)el.textContent=v;});
+  document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active",b.dataset.lang===l));
+  const intake=document.getElementById("intakeLink");
+  const plan=["quick","answer","research","private"].includes(params.get("plan"))?params.get("plan"):"quick";
+  if(intake) intake.href="intake.html?plan="+plan+"&lang="+l;
+}
+document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",()=>apply(b.dataset.lang)));
+apply(lang);
+</script>
+</body>
+</html>

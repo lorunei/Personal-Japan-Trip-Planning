@@ -1,0 +1,700 @@
+/* ==========================================================
+   LORUNEI v1 — consolidated homepage layer
+   Based on v57 (Revised 2); content preserved, technical cleanup only.
+   ========================================================== */
+/* ==========================================================
+   LORUNEI v57 — conversion + deliverable clarity layer
+   Built directly from v51 complete package.
+   Consolidates: hero pronunciation (v45), header/mobile fit (v48),
+   and the isolated five-column footer (v51) under one v52 scope.
+   ========================================================== */
+/* v45 — restore brand pronunciation guide without enlarging the logo */
+.v1-home .hero-name-guide{
+  display:inline-block;
+  margin:0 0 18px;
+  color:#fff;
+}
+.v1-home .hero-brand-name{
+  margin:0 0 2px!important;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-size:1rem!important;
+  line-height:1.2!important;
+  font-weight:750!important;
+  letter-spacing:.08em!important;
+  color:#fff!important;
+}
+.v1-home .hero-pronunciation{
+  margin:0!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:1.05rem!important;
+  line-height:1.25!important;
+  font-style:italic!important;
+  letter-spacing:.01em!important;
+  color:rgba(255,255,255,.88)!important;
+}
+html:lang(ja) .v1-home .hero-pronunciation{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif!important;
+  font-style:normal!important;
+  font-size:.92rem!important;
+  letter-spacing:.04em!important;
+}
+.v1-home .category-line{margin-top:0!important}
+@media(max-width:680px){
+  .v1-home .hero-name-guide{margin-bottom:14px}
+  .v1-home .hero-brand-name{font-size:.92rem!important}
+  .v1-home .hero-pronunciation{font-size:.96rem!important}
+  html:lang(ja) .v1-home .hero-pronunciation{font-size:.88rem!important}
+}
+
+/* ==========================================================
+   LORUNEI v48
+   Complete header reset + Japanese desktop/mobile fit
+   ========================================================== */
+.v1-home{overflow-x:hidden!important}
+.v1-home *{box-sizing:border-box;min-width:0}
+
+/* HEADER: same navy, higher-contrast mark */
+.v1-home .site-header{
+  position:absolute!important;top:0!important;left:0!important;right:0!important;z-index:100!important;
+  background:rgba(7,29,59,.94)!important;
+  border-bottom:1px solid rgba(255,255,255,.12)!important;
+  color:#fff!important;
+  backdrop-filter:blur(10px)!important;
+}
+.v1-home .nav-wrap{
+  width:min(1220px,calc(100% - 48px))!important;
+  height:82px!important;margin:0 auto!important;
+  display:grid!important;grid-template-columns:310px minmax(0,1fr)!important;
+  align-items:center!important;gap:30px!important;
+}
+.v1-home .v39-brand{
+  display:flex!important;align-items:center!important;gap:12px!important;
+  width:300px!important;min-width:300px!important;text-decoration:none!important;
+}
+.v1-home .header-symbol{
+  display:block!important;width:58px!important;height:58px!important;flex:0 0 58px!important;
+  object-fit:contain!important;background:transparent!important;border:0!important;box-shadow:none!important;
+  opacity:1!important;filter:drop-shadow(0 0 1px rgba(255,255,255,.18))!important;
+}
+.v1-home .header-brand-name{
+  display:block!important;color:#fff!important;white-space:nowrap!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:1.55rem!important;line-height:1!important;font-weight:500!important;letter-spacing:.18em!important;
+}
+.v1-home .menu-toggle{display:none!important}
+.v1-home .main-nav{
+  position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  gap:20px!important;padding:0!important;margin:0!important;
+  background:transparent!important;border:0!important;color:#fff!important;
+  white-space:nowrap!important;overflow:visible!important;
+}
+.v1-home .main-nav .nav-localized{display:none!important;align-items:center!important;gap:20px!important}
+html:lang(en) .v1-home .main-nav .nav-localized.lang-en{display:flex!important}
+html:lang(ja) .v1-home .main-nav .nav-localized.lang-ja{display:flex!important}
+.v1-home .main-nav .nav-localized a{
+  display:inline-flex!important;align-items:center!important;
+  margin:0!important;padding:0!important;
+  color:#fff!important;text-decoration:none!important;font-size:.78rem!important;font-weight:700!important;
+}
+.v1-home .main-nav .button-sm{
+  padding:10px 18px!important;border-radius:999px!important;
+  background:#082b50!important;border:1px solid rgba(255,255,255,.2)!important;color:#fff!important;
+}
+.v1-home .lang-switch{
+  display:flex!important;align-items:center!important;gap:6px!important;
+  margin-left:2px!important;color:rgba(255,255,255,.74)!important;flex:0 0 auto!important;
+}
+.v1-home .lang-switch .lang-btn{
+  border:1px solid transparent!important;background:transparent!important;color:rgba(255,255,255,.74)!important;
+  border-radius:6px!important;padding:5px 7px!important;cursor:pointer!important;
+}
+.v1-home .lang-switch .lang-btn.active{color:#fff!important;border-color:rgba(255,255,255,.7)!important}
+
+/* Japanese desktop: fit cleanly, no overflow */
+html:lang(ja) .v1-home .nav-wrap{grid-template-columns:290px minmax(0,1fr)!important;gap:22px!important}
+html:lang(ja) .v1-home .v39-brand{width:280px!important;min-width:280px!important}
+html:lang(ja) .v1-home .main-nav{gap:14px!important}
+html:lang(ja) .v1-home .main-nav .nav-localized{gap:14px!important}
+html:lang(ja) .v1-home .main-nav .nav-localized a{font-size:.73rem!important;letter-spacing:0!important}
+
+/* HERO */
+.v1-home .v39-hero .hero-stage{
+  width:min(1220px,calc(100% - 48px))!important;
+  padding-top:132px!important;padding-bottom:54px!important;margin:0 auto!important;
+}
+.v1-home .hero-copy{width:min(700px,100%)!important;max-width:100%!important}
+html:lang(ja) .v1-home .hero-copy{width:min(680px,100%)!important}
+html:lang(ja) .v1-home .category-line{
+  max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;
+  font-size:1rem!important;line-height:1.5!important;
+}
+html:lang(ja) .v1-home .ja-hero-title{
+  max-width:100%!important;margin-right:0!important;
+  white-space:normal!important;word-break:keep-all!important;overflow-wrap:normal!important;
+  line-break:strict!important;
+  font-size:clamp(2.75rem,4.6vw,4.8rem)!important;line-height:1.14!important;letter-spacing:0!important;
+}
+html:lang(ja) .v1-home .hero-lede{
+  width:min(620px,100%)!important;max-width:100%!important;
+  font-size:.96rem!important;line-height:1.85!important;white-space:normal!important;
+}
+html:lang(ja) .v1-home .brand-manifesto span{
+  white-space:normal!important;overflow-wrap:anywhere!important;
+}
+
+/* Generic Japanese containment across cards/footer */
+html:lang(ja) .v1-home h1,
+html:lang(ja) .v1-home h2,
+html:lang(ja) .v1-home h3,
+html:lang(ja) .v1-home p,
+html:lang(ja) .v1-home a,
+html:lang(ja) .v1-home span,
+html:lang(ja) .v1-home div,
+html:lang(ja) .v1-home summary,
+html:lang(ja) .v1-home label,
+html:lang(ja) .v1-home button{
+  max-width:100%;white-space:normal;overflow-wrap:anywhere;
+}
+html:lang(ja) .v1-home .v39-service-card,
+html:lang(ja) .v1-home .v39-service-body,
+html:lang(ja) .v1-home .v39-service-action,
+html:lang(ja) .v1-home .v39-footer-top,
+html:lang(ja) .v1-home .v39-footer-bottom{min-width:0!important}
+
+/* Footer logo: same bright symbol on navy */
+.v1-home .footer-brand-lockup img{
+  width:60px!important;height:60px!important;flex:0 0 60px!important;
+  object-fit:contain!important;opacity:1!important;filter:none!important;
+}
+
+/* MID DESKTOP: avoid the cramped nav seen in screenshots */
+@media(max-width:1180px) and (min-width:901px){
+  .v1-home .nav-wrap{
+    width:calc(100% - 34px)!important;
+    grid-template-columns:245px minmax(0,1fr)!important;gap:16px!important;
+  }
+  .v1-home .v39-brand{width:235px!important;min-width:235px!important;gap:9px!important}
+  .v1-home .header-symbol{width:46px!important;height:46px!important;flex-basis:46px!important}
+  .v1-home .header-brand-name{font-size:1.22rem!important;letter-spacing:.13em!important}
+  .v1-home .main-nav,.v1-home .main-nav .nav-localized{gap:12px!important}
+  .v1-home .main-nav .nav-localized a{font-size:.72rem!important}
+  html:lang(ja) .v1-home .nav-wrap{grid-template-columns:225px minmax(0,1fr)!important}
+  html:lang(ja) .v1-home .v39-brand{width:215px!important;min-width:215px!important}
+  html:lang(ja) .v1-home .main-nav,html:lang(ja) .v1-home .main-nav .nav-localized{gap:9px!important}
+  html:lang(ja) .v1-home .main-nav .nav-localized a{font-size:.68rem!important}
+}
+
+/* MOBILE / TABLET */
+@media(max-width:900px){
+  .v1-home .nav-wrap{
+    width:calc(100% - 24px)!important;height:70px!important;
+    display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;
+  }
+  .v1-home .v39-brand{width:auto!important;min-width:0!important;gap:8px!important}
+  .v1-home .header-symbol{width:44px!important;height:44px!important;flex-basis:44px!important}
+  .v1-home .header-brand-name{font-size:1.15rem!important;letter-spacing:.11em!important}
+  .v1-home .menu-toggle{
+    display:flex!important;width:44px!important;height:44px!important;flex:0 0 44px!important;
+    flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;
+    padding:8px!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:10px!important;
+    background:transparent!important;
+  }
+  .v1-home .menu-toggle span{display:block!important;width:22px!important;height:2px!important;background:#fff!important;margin:0!important;border-radius:2px!important}
+  .v1-home .main-nav{
+    position:absolute!important;top:70px!important;left:0!important;right:0!important;
+    display:none!important;flex-direction:column!important;align-items:stretch!important;gap:14px!important;
+    padding:20px 18px 24px!important;background:#071d3b!important;border-top:1px solid rgba(255,255,255,.12)!important;
+    white-space:normal!important;max-height:calc(100vh - 70px)!important;overflow-y:auto!important;
+  }
+  .v1-home .main-nav.open{display:flex!important}
+  .v1-home .main-nav .nav-localized{width:100%!important;flex-direction:column!important;align-items:stretch!important;gap:4px!important}
+  html:lang(en) .v1-home .main-nav .nav-localized.lang-en,
+  html:lang(ja) .v1-home .main-nav .nav-localized.lang-ja{display:flex!important}
+  .v1-home .main-nav .nav-localized a{
+    display:block!important;width:100%!important;padding:10px 8px!important;text-align:left!important;
+    font-size:.9rem!important;white-space:normal!important;
+  }
+  .v1-home .main-nav .button-sm{text-align:center!important;margin-top:4px!important}
+  .v1-home .lang-switch{justify-content:center!important;margin:4px 0 0!important;padding-top:10px!important;border-top:1px solid rgba(255,255,255,.12)!important}
+  .v1-home .v39-hero .hero-stage{
+    width:calc(100% - 24px)!important;padding-top:108px!important;padding-bottom:34px!important;
+  }
+  .v1-home .hero-copy{width:100%!important;max-width:100%!important}
+  html:lang(ja) .v1-home .category-line{font-size:.9rem!important;line-height:1.55!important}
+  html:lang(ja) .v1-home .ja-hero-title{
+    width:100%!important;max-width:100%!important;
+    font-size:clamp(1.95rem,9.4vw,2.65rem)!important;line-height:1.28!important;
+    word-break:keep-all!important;overflow-wrap:normal!important;
+  }
+  html:lang(ja) .v1-home .hero-lede{
+    width:100%!important;font-size:.84rem!important;line-height:1.8!important;
+  }
+  .v1-home .brand-manifesto{grid-template-columns:1fr!important;gap:7px!important;width:100%!important}
+  .v1-home .brand-manifesto span{border-left:0!important;padding:0!important}
+  .v1-home .hero-actions{display:grid!important;grid-template-columns:1fr!important;width:100%!important;gap:9px!important}
+  .v1-home .hero-actions a{width:100%!important;max-width:100%!important;white-space:normal!important}
+  .v1-home .based{display:block!important;max-width:100%!important;white-space:normal!important}
+  .v1-home .v39-service-card{width:100%!important;grid-template-columns:minmax(0,1fr)!important;overflow:hidden!important}
+  .v1-home .v39-service-card>img{width:100%!important;height:140px!important}
+  .v1-home .v39-service-body,.v1-home .v39-service-action{width:100%!important;padding-left:16px!important;padding-right:16px!important}
+  .v1-home .v39-btn{width:100%!important;max-width:100%!important;white-space:normal!important}
+  .v1-home .v40-form{width:100%!important;max-width:100%!important;overflow:hidden!important}
+  .v1-home .v40-form input,.v1-home .v40-form select,.v1-home .v40-form textarea{width:100%!important;max-width:100%!important;min-width:0!important;font-size:16px!important}
+}
+
+@media(max-width:390px){
+  .v1-home .nav-wrap{width:calc(100% - 18px)!important}
+  .v1-home .header-symbol{width:40px!important;height:40px!important;flex-basis:40px!important}
+  .v1-home .header-brand-name{font-size:1.02rem!important;letter-spacing:.09em!important}
+  .v1-home .v39-hero .hero-stage{width:calc(100% - 20px)!important}
+  html:lang(ja) .v1-home .ja-hero-title{font-size:1.82rem!important;line-height:1.32!important}
+  html:lang(ja) .v1-home .category-line{font-size:.83rem!important}
+}
+
+/* ==========================================================
+   LORUNEI v51 — final isolated footer
+   This footer does NOT reuse the legacy v39 footer grid.
+   ========================================================== */
+.v1-home .site-footer-v51{
+  background:#071d3b;
+  color:#f7f1e7;
+  padding:58px 0 0;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.v1-home .footer-grid-v51{
+  width:min(1220px,calc(100% - 48px));
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.35fr 1fr 1fr 1fr .9fr;
+  gap:38px;
+  align-items:start;
+  padding-bottom:46px;
+}
+.v1-home .footer-grid-v51 > *{min-width:0}
+.v1-home .footer-brand-v51{min-width:0}
+.v1-home .footer-brand-lockup-v51{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+  white-space:nowrap;
+}
+.v1-home .footer-symbol-v51{
+  display:block;
+  width:62px;
+  height:62px;
+  flex:0 0 62px;
+  object-fit:contain;
+}
+.v1-home .footer-name-v51{
+  color:#fff;
+  font:500 1.52rem/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.16em;
+  white-space:nowrap;
+}
+.v1-home .footer-brand-copy-v51{
+  max-width:270px;
+  color:#eef2f5;
+}
+.v1-home .footer-brand-copy-v51 p{
+  margin:0 0 7px;
+  font-size:.84rem;
+  line-height:1.65;
+}
+.v1-home .footer-brand-copy-v51 em{
+  display:block;
+  margin:0;
+  color:#fff;
+  font:italic 400 .9rem/1.5 Georgia,"Times New Roman",serif;
+}
+html:lang(ja) .v1-home .footer-brand-copy-v51 em{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-style:normal;
+  font-size:.82rem;
+}
+.v1-home .footer-col-v51 h3{
+  margin:5px 0 18px;
+  color:#d5aa5c;
+  font-size:.78rem;
+  line-height:1.2;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+html:lang(ja) .v1-home .footer-col-v51 h3{
+  text-transform:none;
+  letter-spacing:.03em;
+  font-size:.84rem;
+}
+.v1-home .footer-links-v51{
+  display:grid;
+  gap:12px;
+}
+.v1-home .footer-links-v51 a{
+  color:#edf1f5;
+  text-decoration:none;
+  font-size:.78rem;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.v1-home .footer-links-v51 a:hover{text-decoration:underline}
+.v1-home .footer-language-v51{
+  display:flex;
+  gap:8px;
+  margin-top:22px;
+}
+.v1-home .footer-language-v51 .lang-btn{
+  border:1px solid rgba(255,255,255,.42);
+  color:#fff;
+  background:transparent;
+  border-radius:7px;
+  padding:8px 12px;
+  font-size:.76rem;
+  cursor:pointer;
+}
+.v1-home .footer-language-v51 .lang-btn.active{
+  background:#c9a45f;
+  color:#071d3b;
+  border-color:#c9a45f;
+}
+.v1-home .footer-bottom-v51{
+  width:min(1220px,calc(100% - 48px));
+  margin:0 auto;
+  border-top:1px solid rgba(255,255,255,.24);
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  color:#dce3e9;
+  font-size:.7rem;
+}
+.v1-home .footer-legal-v51{
+  align-items:center;
+  gap:10px;
+  white-space:nowrap;
+}
+html:lang(en) .v1-home .footer-legal-v51.lang-en{display:flex!important}
+html:lang(ja) .v1-home .footer-legal-v51.lang-ja{display:flex!important}
+.v1-home .footer-legal-v51 a{color:#dce3e9;text-decoration:none}
+.v1-home .footer-legal-v51 a:hover{text-decoration:underline}
+
+/* desktop Japanese gets a little more room in labels */
+@media(min-width:901px){
+  html:lang(ja) .v1-home .footer-grid-v51{
+    grid-template-columns:1.3fr 1fr .95fr 1.15fr .9fr;
+    gap:32px;
+  }
+  html:lang(ja) .v1-home .footer-links-v51 a{
+    font-size:.76rem;
+    line-height:1.55;
+    word-break:normal;
+    overflow-wrap:anywhere;
+  }
+}
+
+/* Tablet/mobile: deliberately simple and collision-proof */
+@media(max-width:900px){
+  .v1-home .site-footer-v51{padding-top:40px}
+  .v1-home .footer-grid-v51{
+    width:calc(100% - 32px);
+    grid-template-columns:1fr 1fr;
+    gap:32px 24px;
+    padding-bottom:34px;
+  }
+  .v1-home .footer-brand-v51{
+    grid-column:1 / -1;
+  }
+  .v1-home .footer-brand-copy-v51{max-width:100%}
+  .v1-home .footer-bottom-v51{
+    width:calc(100% - 32px);
+    min-height:0;
+    padding:22px 0 28px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .v1-home .footer-legal-v51{
+    flex-wrap:wrap;
+    white-space:normal;
+  }
+}
+@media(max-width:560px){
+  .v1-home .footer-grid-v51{grid-template-columns:1fr}
+  .v1-home .footer-brand-v51{grid-column:auto}
+  .v1-home .footer-brand-lockup-v51{gap:10px}
+  .v1-home .footer-symbol-v51{width:54px;height:54px;flex-basis:54px}
+  .v1-home .footer-name-v51{font-size:1.28rem;letter-spacing:.13em}
+}
+
+/* v52 QA fix: language visibility rules in style.css use display:block!important.
+   Restore the intended vertical grid for the localized footer link groups. */
+html:lang(en) .v1-home .footer-links-v51.lang-en{display:grid!important}
+html:lang(ja) .v1-home .footer-links-v51.lang-ja{display:grid!important}
+
+
+/* ==========================================================
+   LORUNEI v54 — public form receipt + footer polish
+   ========================================================== */
+/* Keep Formspree's honeypot available to bots but invisible to guests. */
+.v1-home .hp-field{
+  position:absolute!important;
+  left:-9999px!important;
+  width:1px!important;
+  height:1px!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+/* Version number only: keep inherited color/weight, double the size. */
+.v1-home .footer-legal-v51 a[href*="changelog"] b{
+  font-size:1em;
+  font-weight:inherit;
+}
+
+
+/* ==========================================================
+   LORUNEI v57 — submission receipt
+   ========================================================== */
+.v1-home .submission-receipt[hidden]{display:none!important}
+.v1-home .submission-receipt{margin-top:22px;padding:22px;border:1px solid rgba(7,29,59,.16);border-radius:14px;background:#f8f6f1;color:#102c49}
+.v1-home .submission-receipt h3{margin:4px 0 10px;font:500 1.35rem/1.3 Georgia,"Times New Roman",serif}
+.v1-home .receipt-kicker{margin:0!important;color:#8a6a2f;font-size:.7rem!important;font-weight:800;letter-spacing:.14em}
+.v1-home .receipt-intro,.v1-home .receipt-note{margin:0 0 18px!important;font-size:.82rem!important;line-height:1.65!important;color:#5f6b75}
+.v1-home .receipt-details{margin:0;display:grid;gap:0;border-top:1px solid rgba(7,29,59,.12)}
+.v1-home .receipt-details>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid rgba(7,29,59,.1)}
+.v1-home .receipt-details dt{font-size:.75rem;font-weight:800;color:#536170}
+.v1-home .receipt-details dd{margin:0;font-size:.8rem;line-height:1.55;overflow-wrap:anywhere}
+.v1-home .receipt-message-row dd{white-space:pre-wrap}
+.v1-home .receipt-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.v1-home .receipt-button{border:1px solid #0b345d;border-radius:999px;background:#fff;color:#0b345d;padding:9px 14px;font:700 .76rem/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}
+.v1-home .receipt-button:hover{background:#eef3f7}
+.v1-home .receipt-action-status{min-height:1.3em;margin:10px 0 0!important;font-size:.76rem!important;color:#36566f}
+.v1-home .receipt-note{margin-top:8px!important;margin-bottom:0!important}
+@media(max-width:560px){.v1-home .receipt-details>div{grid-template-columns:1fr;gap:3px}.v1-home .receipt-actions{display:grid;grid-template-columns:1fr}.v1-home .receipt-button{width:100%}}
+@media print{body *{visibility:hidden!important}#submissionReceipt,#submissionReceipt *{visibility:visible!important}#submissionReceipt{display:block!important;position:absolute!important;left:0!important;top:0!important;width:100%!important;margin:0!important;padding:18mm!important;border:0!important;background:#fff!important}#submissionReceipt .receipt-actions,#submissionReceipt .receipt-action-status,#submissionReceipt .receipt-note{display:none!important}}
+
+
+/* ==========================================================
+   LORUNEI v57 — Try LORUNEI + concrete deliverables
+   ========================================================== */
+.v1-home .v55-start-badge{
+  display:inline-flex;align-items:center;width:max-content;max-width:100%;
+  margin:0 0 10px;padding:6px 10px;border-radius:999px;
+  background:#f3e7ce;color:#6f5121;font-size:.66rem;font-weight:850;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+html:lang(ja) .v1-home .v55-start-badge{letter-spacing:.03em;text-transform:none}
+.v1-home .v55-upgrade-note{
+  margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(7,29,59,.12);
+  color:#536170;font-size:.74rem;line-height:1.55;
+}
+.v1-home .v55-upgrade-note strong{color:#102c49}
+
+.v1-home .v55-deliverables{
+  background:#f5f1ea;color:#102c49;padding:82px 0;
+}
+.v1-home .v55-deliverables-head{
+  display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:54px;align-items:end;
+  margin-bottom:34px;
+}
+.v1-home .v55-deliverables-head h2{
+  margin:5px 0 0;font:400 clamp(2.3rem,4vw,4.2rem)/1 Georgia,"Times New Roman",serif;
+}
+.v1-home .v55-deliverables-head p{margin:0;color:#596773;line-height:1.8;max-width:690px}
+.v1-home .v55-example-question{
+  margin:0 0 24px;padding:16px 18px;border-left:3px solid #b18a4f;background:#fff;
+  border-radius:0 10px 10px 0;font-size:.9rem;line-height:1.65;
+}
+.v1-home .v55-output-grid{
+  display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:24px;align-items:stretch;
+}
+.v1-home .v55-output-card{
+  background:#fff;border:1px solid rgba(7,29,59,.12);border-radius:16px;overflow:hidden;
+  box-shadow:0 12px 32px rgba(7,29,59,.06);
+}
+.v1-home .v55-output-card.answer{border-color:rgba(177,138,79,.42)}
+.v1-home .v55-output-top{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:14px;
+  padding:19px 21px 16px;border-bottom:1px solid rgba(7,29,59,.1);
+}
+.v1-home .v55-output-type{margin:0;font-size:.68rem;font-weight:850;letter-spacing:.11em;color:#7d653c;text-transform:uppercase}
+html:lang(ja) .v1-home .v55-output-type{text-transform:none;letter-spacing:.03em}
+.v1-home .v55-output-title{margin:3px 0 0;font:500 1.25rem/1.25 Georgia,"Times New Roman",serif}
+.v1-home .v55-output-price{font:500 1.75rem/1 Georgia,"Times New Roman",serif;white-space:nowrap;color:#071d3b;flex:0 0 auto}
+.v1-home .v55-doc{padding:20px 21px}
+.v1-home .v55-doc-row{padding:11px 0;border-bottom:1px solid rgba(7,29,59,.08)}
+.v1-home .v55-doc-row:last-child{border-bottom:0}
+.v1-home .v55-doc-label{display:block;margin-bottom:4px;font-size:.68rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase;color:#6d7780}
+html:lang(ja) .v1-home .v55-doc-label{text-transform:none;letter-spacing:.02em}
+.v1-home .v55-doc p{margin:0;font-size:.83rem;line-height:1.62;color:#334c60}
+.v1-home .v55-recommendation{font-weight:800;color:#102c49!important}
+.v1-home .v55-mini-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.74rem}
+.v1-home .v55-mini-table th,.v1-home .v55-mini-table td{padding:7px 5px;border-bottom:1px solid rgba(7,29,59,.08);text-align:left}
+.v1-home .v55-mini-table th{font-weight:800;color:#536170}
+.v1-home .v55-mini-table td:first-child{font-weight:800;color:#102c49}
+.v1-home .v55-output-foot{
+  padding:14px 21px;background:#faf8f4;border-top:1px solid rgba(7,29,59,.08);
+  color:#68727b;font-size:.72rem;line-height:1.5;
+}
+.v1-home .v55-why99{
+  margin-top:26px;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:24px;
+  padding:25px;border:1px solid rgba(7,29,59,.13);border-radius:15px;background:#0a2b4e;color:#fff;
+}
+.v1-home .v55-why99 h3{margin:0;font:500 clamp(1.35rem,2.2vw,2rem)/1.25 Georgia,"Times New Roman",serif;color:#fff}
+.v1-home .v55-why99 p{margin:0;color:#eef2f5;font-size:.86rem;line-height:1.75}
+.v1-home .v55-why99 strong{color:#e2bd79}
+.v1-home .v55-start-strip{
+  margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;
+  padding:22px 24px;border-radius:15px;background:#fff;border:1px solid rgba(177,138,79,.32);
+}
+.v1-home .v55-start-strip h3{margin:0 0 5px;font:500 1.28rem/1.25 Georgia,"Times New Roman",serif}
+.v1-home .v55-start-strip p{margin:0;color:#596773;font-size:.82rem;line-height:1.6}
+.v1-home .v55-start-strip .v39-btn{min-width:190px;text-align:center}
+
+@media(max-width:900px){
+  .v1-home .v55-deliverables{padding:62px 0}
+  .v1-home .v55-deliverables-head,.v1-home .v55-output-grid,.v1-home .v55-why99{grid-template-columns:1fr}
+  .v1-home .v55-deliverables-head{gap:16px}
+  .v1-home .v55-output-grid{gap:18px}
+  .v1-home .v55-start-strip{grid-template-columns:1fr}
+  .v1-home .v55-start-strip .v39-btn{width:100%;min-width:0}
+}
+@media(max-width:560px){
+  .v1-home .v55-deliverables-head h2{font-size:2.15rem}
+  .v1-home .v55-output-price{font-size:1.45rem}
+  .v1-home .v55-output-title{font-size:1.08rem}
+  .v1-home .v55-output-type{font-size:.61rem}
+  .v1-home .v55-output-top{gap:10px}
+  .v1-home .v55-output-top{padding:17px}
+  .v1-home .v55-doc{padding:17px}
+  .v1-home .v55-mini-table{font-size:.68rem}
+  .v1-home .v55-why99,.v1-home .v55-start-strip{padding:19px}
+}
+
+/* ==========================================================
+   LORUNEI v57 — first-trip conversion path
+   ========================================================== */
+.v1-home .v39-services-grid{align-items:start}
+.v1-home .v39-services-lead{grid-row:1 / span 2}
+.v1-home .v57-choice-strip{grid-column:2;grid-row:1}
+.v1-home .v39-service-list{grid-column:2;grid-row:2}
+.v1-home .v57-choice-strip{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+  overflow:hidden;margin:0 0 12px;border-radius:12px;background:rgba(7,29,59,.14)
+}
+.v1-home .v57-choice-strip a{
+  display:flex;min-height:68px;flex-direction:column;justify-content:center;gap:3px;
+  padding:12px 14px;background:#fff;color:#102c49;text-decoration:none
+}
+.v1-home .v57-choice-strip a:hover{background:#f8f4ed}
+.v1-home .v57-choice-strip strong{font:500 1.28rem/1 Georgia,"Times New Roman",serif;color:#071d3b}
+.v1-home .v57-choice-strip span{font-size:.67rem;line-height:1.35;color:#596773}
+.v1-home .v57-service-proof{
+  margin-top:8px!important;padding-top:7px;border-top:1px solid rgba(7,29,59,.1);
+  font-size:.63rem!important;line-height:1.4!important;font-weight:700;color:#6a5a3f!important
+}
+.v1-home .v39-service-card.private .v57-service-proof{border-color:rgba(255,255,255,.17);color:#e6c88e!important}
+
+.v1-home .v57-samples{padding:76px 0;background:#f8f5ef;color:#102c49}
+.v1-home .v57-samples-head{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:end;margin-bottom:30px}
+.v1-home .v57-samples-head h2{margin:0;font:500 clamp(2.15rem,4vw,3.65rem)/1.02 Georgia,"Times New Roman",serif}
+.v1-home .v57-samples-head p{margin:0;color:#5b6874;font-size:.88rem;line-height:1.75}
+.v1-home .v57-samples-head .v39-eyebrow{margin-bottom:13px;font-size:.66rem;color:#8b6b35}
+.v1-home .v57-sample-ladder{border-top:1px solid rgba(7,29,59,.18)}
+.v1-home .v57-sample-ladder>a{
+  display:grid;grid-template-columns:110px minmax(0,1fr) 32px;gap:24px;align-items:center;
+  min-height:108px;padding:20px 8px;border-bottom:1px solid rgba(7,29,59,.18);
+  color:#102c49;text-decoration:none
+}
+.v1-home .v57-sample-ladder>a:hover{background:rgba(177,138,79,.08)}
+.v1-home .v57-sample-price{font:500 2rem/1 Georgia,"Times New Roman",serif;color:#967238}
+.v1-home .v57-sample-ladder strong{display:block;margin-bottom:6px;font:500 1.22rem/1.25 Georgia,"Times New Roman",serif}
+.v1-home .v57-sample-ladder small{display:block;font-size:.75rem;line-height:1.5;color:#687581}
+.v1-home .v57-sample-ladder b{font:400 1.3rem/1 Georgia,"Times New Roman",serif;color:#967238;text-align:right}
+.v1-home .v57-samples-cta{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;
+  margin-top:28px;padding:24px 26px;border-radius:14px;background:#071d3b;color:#fff
+}
+.v1-home .v57-samples-cta h3{margin:0 0 5px;font:500 1.35rem/1.2 Georgia,"Times New Roman",serif;color:#fff}
+.v1-home .v57-samples-cta p{margin:0;max-width:760px;color:#e7edf2;font-size:.78rem;line-height:1.65}
+.v1-home .v57-samples-cta .v39-btn{min-width:220px;background:#fff;color:#082b50}
+.v1-home .v57-process-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+.v1-home .v40-form textarea{min-height:150px}
+
+@media(max-width:900px){
+  .v1-home .v39-services-lead,.v1-home .v57-choice-strip,.v1-home .v39-service-list{grid-column:1;grid-row:auto}
+  .v1-home .v57-choice-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v1-home .v57-samples-head{grid-template-columns:1fr;gap:16px}
+  .v1-home .v57-samples-cta{grid-template-columns:1fr}
+  .v1-home .v57-samples-cta .v39-btn{width:100%;min-width:0}
+  .v1-home .v57-process-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:680px){
+  .v1-home .v57-samples{padding:56px 0}
+  .v1-home .v57-sample-ladder>a{grid-template-columns:74px minmax(0,1fr) 18px;gap:12px;min-height:96px;padding:18px 2px}
+  .v1-home .v57-sample-price{font-size:1.35rem}
+  .v1-home .v57-sample-ladder strong{font-size:1.02rem}
+  .v1-home .v57-samples-cta{padding:21px}
+  .v1-home .v57-process-row{grid-template-columns:1fr}
+}
+
+
+/* ==========================================================
+   LORUNEI v57 (Revised 2) — trust and scope clarity
+   ========================================================== */
+.v1-home .v57-kai2-judgement{
+  padding:64px 0;background:#071d3b;color:#fff
+}
+.v1-home .v57-kai2-judgement-grid{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center
+}
+.v1-home .v57-kai2-judgement .v39-eyebrow{color:#d8b36d}
+.v1-home .v57-kai2-judgement h2{
+  margin:0;font:500 clamp(2rem,3.3vw,3.35rem)/1.05 Georgia,"Times New Roman",serif;color:#fff
+}
+.v1-home .v57-kai2-judgement-copy>p{
+  margin:0;color:#e4eaf0;font-size:.9rem;line-height:1.8;max-width:720px
+}
+.v1-home .v57-kai2-proof-row{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  margin-top:25px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden
+}
+.v1-home .v57-kai2-proof-row>span{
+  display:flex;min-height:82px;flex-direction:column;justify-content:center;gap:7px;padding:14px 16px;background:#0a284b
+}
+.v1-home .v57-kai2-proof-row b{
+  font:500 .72rem/1 Georgia,"Times New Roman",serif;color:#d8b36d;letter-spacing:.08em
+}
+.v1-home .v57-kai2-proof-row>span>span{font-size:.7rem;line-height:1.45;color:#f3f6f8}
+
+.v1-home .v57-kai2-booking-boundary{
+  padding:14px 18px;border:1px solid rgba(151,113,55,.28);border-left:4px solid #b18a4f;border-radius:9px;background:#fffaf1;color:#102c49
+}
+.v1-home .v57-kai2-booking-boundary>div{grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
+html:lang(en) .v1-home .v57-kai2-booking-boundary>.lang-en,
+html:lang(ja) .v1-home .v57-kai2-booking-boundary>.lang-ja{display:grid!important}
+.v1-home .v57-kai2-booking-boundary strong{font-size:.75rem;line-height:1.5;white-space:nowrap}
+.v1-home .v57-kai2-booking-boundary span{font-size:.69rem;line-height:1.55;color:#5a6570}
+.v1-home .v57-kai2-private-scope{
+  margin-top:6px!important;font-size:.62rem!important;line-height:1.45!important;color:#dce6ef!important
+}
+
+.v1-home .v57-kai2-quick-form-note{
+  margin-top:17px!important;padding:14px 16px;border-left:3px solid #b18a4f;background:rgba(255,255,255,.56);font-size:.78rem!important;line-height:1.65!important
+}
+.v1-home .v57-kai2-quick-form-note strong{color:#102c49}
+.v1-home .v57-kai2-field-help{
+  display:block;margin-top:7px;color:#667481;font-size:.69rem;line-height:1.5;font-weight:500
+}
+
+@media(max-width:900px){
+  .v1-home .v57-kai2-judgement-grid{grid-template-columns:1fr;gap:24px}
+  .v1-home .v57-kai2-judgement-copy>p{max-width:none}
+}
+@media(max-width:680px){
+  .v1-home .v57-kai2-judgement{padding:50px 0}
+  .v1-home .v57-kai2-judgement h2{font-size:2rem;line-height:1.18}
+  .v1-home .v57-kai2-proof-row{grid-template-columns:1fr}
+  .v1-home .v57-kai2-proof-row>span{min-height:66px}
+  .v1-home .v57-kai2-booking-boundary>div{grid-template-columns:1fr;gap:4px}
+  .v1-home .v57-kai2-booking-boundary strong{white-space:normal}
+}
