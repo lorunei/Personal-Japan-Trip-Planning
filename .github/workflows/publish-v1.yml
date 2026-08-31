@@ -1,0 +1,241 @@
+name: Publish LORUNEI v1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Import pinned LORUNEI source
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone -q https://github.com/japaninsider/japaninsider.git "$tmp/source"
+          git -C "$tmp/source" checkout -q 6c23cd92e940f220c5a706c96b5bfca40dafc76a
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github -exec rm -rf {} +
+          rsync -a --exclude='.git' --exclude='.github' "$tmp/source/" ./
+
+      - name: Convert dedicated repository to v1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re, shutil
+
+          root = Path(".")
+          keep_top = {
+              ".nojekyll",
+              "404.html", "about-masayasu.html", "changelog.html", "index.html",
+              "intake.html", "legal.html", "privacy.html", "samples.html",
+              "terms.html", "thank-you.html", "robots.txt", "sitemap.xml",
+              "DELIVERY-TEMPLATE.md", "ORDER-WORKFLOW.md",
+              "QUICK-HELP-CHECKOUT-TEST.md", "SERVICE-SCOPE.md",
+              "SITE-QA.md", "STRIPE-SETUP.md",
+              "FORMSPREE-SETUP-v29.md", "FORMSPREE-AUTORESPONSE-v41.md",
+              "README.md", "assets",
+          }
+
+          for p in list(root.iterdir()):
+              if p.name in {".git", ".github"}:
+                  continue
+              if p.name not in keep_top:
+                  if p.is_dir():
+                      shutil.rmtree(p)
+                  else:
+                      p.unlink()
+
+          css = root / "assets/css"
+          js = root / "assets/js"
+
+          (css / "v1.css").write_text(
+              (css / "v57b3.css").read_text(encoding="utf-8").replace("v57b3", "v1"),
+              encoding="utf-8",
+          )
+          (css / "samples-v1.css").write_text(
+              (css / "samples-v57b3.css").read_text(encoding="utf-8")
+                  .replace("samples-v57b3", "samples-v1")
+                  .replace("v57b3", "v1"),
+              encoding="utf-8",
+          )
+          for p in list(css.iterdir()):
+              if p.name not in {"style.css", "v1.css", "samples-v1.css"}:
+                  p.unlink()
+
+          (js / "v1.js").write_text(
+              (js / "v57b3.js").read_text(encoding="utf-8").replace("v57b3", "v1"),
+              encoding="utf-8",
+          )
+          (js / "samples-v1.js").write_text(
+              (js / "samples-v57b3.js").read_text(encoding="utf-8").replace("v57b3", "v1"),
+              encoding="utf-8",
+          )
+          for p in list(js.iterdir()):
+              if p.name not in {"payments.js", "v1.js", "samples-v1.js"}:
+                  p.unlink()
+          (js / "main.js").write_text(
+              "// LORUNEI legacy main.js — retired in v1\n"
+              "// Current runtime: v1.js, payments.js, samples-v1.js\n",
+              encoding="utf-8",
+          )
+
+          replacements = [
+              ("infojapaninsider@gmail.com", "infolorunei@gmail.com"),
+              ("https://formspree.io/f/xeajbpvn", "https://formspree.io/f/mjyvgqad"),
+              ("xeajbpvn", "mjyvgqad"),
+              ("https://japaninsider.github.io/japaninsider/", "https://lorunei.github.io/Personal-Japan-Trip-Planning/"),
+              ("https://japaninsider.github.io/japaninsider", "https://lorunei.github.io/Personal-Japan-Trip-Planning"),
+              ("v57b3", "v1"),
+              ("v57 (Revised 2)", "v1"),
+              ("v57（改2）", "v1"),
+          ]
+
+          text_ext = {".html", ".md", ".txt", ".xml", ".css", ".js", ".yml", ".yaml"}
+          for p in root.rglob("*"):
+              if not p.is_file() or ".git" in p.parts or p.suffix.lower() not in text_ext:
+                  continue
+              s = p.read_text(encoding="utf-8")
+              for old, new in replacements:
+                  s = s.replace(old, new)
+              p.write_text(s, encoding="utf-8")
+
+          for old, new in [
+              ("FORMSPREE-SETUP-v29.md", "FORMSPREE-SETUP.md"),
+              ("FORMSPREE-AUTORESPONSE-v41.md", "FORMSPREE-AUTORESPONSE.md"),
+          ]:
+              p = root / old
+              if p.exists():
+                  p.rename(root / new)
+
+          (root / "changelog.html").write_text("""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LORUNEI — Version History</title><link rel="stylesheet" href="assets/css/style.css"><style>.subpage{background:#f5f1ea;color:#102c49;min-height:100vh}.sub-head{background:#071d3b;color:#fff;padding:18px 0}.sub-head .container{display:flex;justify-content:space-between;align-items:center}.sub-wrap{width:min(960px,calc(100% - 36px));margin:auto;padding:64px 0}.sub-card{background:#fff;border-radius:14px;padding:26px;margin:16px 0;border:1px solid rgba(7,29,59,.1)}.sub-title{font:400 3rem Georgia,serif}.lang-ja{display:none!important}html:lang(ja) .lang-en{display:none!important}html:lang(ja) .lang-ja{display:block!important}</style></head><body class="subpage"><header class="sub-head"><div class="container"><a href="index.html">LORUNEI</a><div><button data-lang="en">EN</button> <button data-lang="ja">日本語</button></div></div></header><main class="sub-wrap"><div class="lang-en"><h1 class="sub-title">Version history</h1><p>Major public-facing website changes.</p></div><div class="lang-ja"><h1 class="sub-title">変更履歴</h1><p>公開サイトの主な更新内容です。</p></div><section class="sub-card"><h2>v1 — 2026-09-01</h2><div class="lang-en"><ul><li>Initial public release on the dedicated LORUNEI repository.</li><li>Quick Help: $49 for one focused Japan travel topic with up to 3 closely related questions.</li><li>Contact: infolorunei@gmail.com.</li></ul></div><div class="lang-ja"><ul><li>LORUNEI専用リポジトリでの初回公開。</li><li>Quick Help：49米ドル、1つのテーマについて関連する質問3つまで。</li><li>相談先：infolorunei@gmail.com。</li></ul></div></section></main><footer class="sub-head"><div class="container">© 2026 LORUNEI · v1</div></footer><script>const p=new URLSearchParams(location.search);let l=p.get('lang')||localStorage.getItem('loruneiLang')||((navigator.language||'').toLowerCase().startsWith('ja')?'ja':'en');if(!['en','ja'].includes(l))l='en';document.documentElement.lang=l;document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.lang;localStorage.setItem('loruneiLang',b.dataset.lang)});</script></body></html>""", encoding="utf-8")
+
+          (root / "README.md").write_text("""# LORUNEI — Personal Japan Trip Planning
+
+Bilingual English / Japanese static website for LORUNEI.
+
+- Live site: https://lorunei.github.io/Personal-Japan-Trip-Planning/
+- Repository: https://github.com/lorunei/Personal-Japan-Trip-Planning
+- Current public build: v1
+- Contact: infolorunei@gmail.com
+- Form delivery: Formspree endpoint mjyvgqad
+- Hosting: GitHub Pages
+- Public/base pricing currency: USD
+
+## Services
+
+- Quick Help — $49: one focused Japan travel topic, up to 3 closely related questions.
+- Japan Answer — $99: one connected decision evaluated as a Decision Brief.
+- Japan Research — $299: defined-scope research with named options and comparison.
+- Private Japan Planning — from $999: custom whole-journey planning.
+
+If Quick Help is clearly too narrow, LORUNEI tells the customer before deeper work begins. With customer approval, the full $49 can be credited toward Japan Answer, leaving $50 due.
+
+## Formspree
+
+Homepage inquiry and post-payment intake submit to:
+https://formspree.io/f/mjyvgqad
+
+The visible contact address is infolorunei@gmail.com.
+
+## Stripe
+
+The Quick Help Stripe Payment Link remains intentionally blank until a verified live Payment Link is supplied. Until then, Quick Help uses the safe inquiry fallback.
+""", encoding="utf-8")
+
+          (root / "SITE-QA.md").write_text("""# LORUNEI v1 Site QA
+
+- [x] Public build markers use v1.
+- [x] Contact email is infolorunei@gmail.com.
+- [x] Homepage and intake use Formspree endpoint mjyvgqad.
+- [x] Quick Help is $49 for one focused topic with up to 3 related questions.
+- [x] Stripe Payment Link remains blank until a verified live URL is supplied.
+- [ ] Confirm desktop/mobile EN/JA rendering on public GitHub Pages after deployment.
+""", encoding="utf-8")
+
+          (root / "FORMSPREE-SETUP.md").write_text("""# Formspree Setup — LORUNEI v1
+
+Endpoint:
+https://formspree.io/f/mjyvgqad
+
+Contact / intended consultation address:
+infolorunei@gmail.com
+
+The homepage inquiry form and post-payment intake both use this endpoint.
+Verify the recipient and autoresponse settings in the Formspree dashboard before paid traffic is sent to the site.
+""", encoding="utf-8")
+
+          (root / "V1-QA.md").write_text("""# LORUNEI v1 QA — 2026-09-01
+
+- Public build: v1
+- Contact: infolorunei@gmail.com
+- Formspree: https://formspree.io/f/mjyvgqad
+- Live URL target: https://lorunei.github.io/Personal-Japan-Trip-Planning/
+- Quick Help: $49 / one focused topic / up to 3 closely related questions
+- Japan Answer: $99
+- Japan Research: $299
+- Private Japan Planning: from $999
+- Stripe Payment Link intentionally blank; inquiry fallback preserved.
+""", encoding="utf-8")
+
+          htmls = list(root.glob("*.html"))
+          missing = []
+          duplicate_ids = []
+          for hp in htmls:
+              s = hp.read_text(encoding="utf-8")
+              for attr in ("href", "src"):
+                  for m in re.finditer(rf'{attr}=["\']([^"\']+)["\']', s):
+                      ref = m.group(1)
+                      if ref.startswith(("http://","https://","#","mailto:","javascript:","data:")):
+                          continue
+                      ref = ref.split("?")[0].split("#")[0]
+                      if ref and not (hp.parent / ref).exists():
+                          missing.append((hp.name, ref))
+              vals = re.findall(r'\bid=["\']([^"\']+)', s)
+              dup = sorted({x for x in vals if vals.count(x) > 1})
+              if dup:
+                  duplicate_ids.append((hp.name, dup))
+
+          all_text = "\n".join(
+              p.read_text(encoding="utf-8", errors="ignore")
+              for p in root.rglob("*")
+              if p.is_file() and ".git" not in p.parts and p.suffix.lower() in text_ext
+          )
+          assert not missing, missing
+          assert not duplicate_ids, duplicate_ids
+          assert "infojapaninsider@gmail.com" not in all_text
+          assert "xeajbpvn" not in all_text
+          assert "japaninsider.github.io/japaninsider" not in all_text
+          assert "v57b3" not in all_text
+          assert "$45" not in all_text
+          assert "45米ドル" not in all_text
+          assert "infolorunei@gmail.com" in all_text
+          assert "mjyvgqad" in all_text
+          PY
+
+          node --check assets/js/v1.js
+          node --check assets/js/samples-v1.js
+          node --check assets/js/payments.js
+
+      - name: Commit v1
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "LORUNEI Publisher"
+          git config user.email "infolorunei@gmail.com"
+          git add -A
+          git commit -m "Publish LORUNEI v1" -m "Reset the dedicated LORUNEI site version to v1, update consultation email to infolorunei@gmail.com, switch Formspree to mjyvgqad, and preserve the validated v57b3 service/content model."
+          git push origin main
