@@ -239,3 +239,5 @@ Verify the recipient and autoresponse settings in the Formspree dashboard before
           git add -A
           git commit -m "Publish LORUNEI v1" -m "Reset the dedicated LORUNEI site version to v1, update consultation email to infolorunei@gmail.com, switch Formspree to mjyvgqad, and preserve the validated v57b3 service/content model."
           git push origin main
+
+# trigger v1 publisher
