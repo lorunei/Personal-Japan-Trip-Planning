@@ -1,9 +1,8 @@
 // LORUNEI payment configuration
-// Paste the real Stripe Payment Link URL below after Stripe setup.
-// Do not use a placeholder or fabricated URL.
-// In Stripe, set the post-payment redirect to:
-// https://YOUR-DOMAIN/thank-you.html?plan=quick
-const STRIPE_QUICK_PAYMENT_LINK = "";
+// Live Stripe Payment Link for Quick Help.
+// Stripe post-payment redirect:
+// https://lorunei.github.io/Personal-Japan-Trip-Planning/intake.html
+const STRIPE_QUICK_PAYMENT_LINK = "https://buy.stripe.com/bJe14o1qS6I37uu4pQ9MY00";
 
 (function(){
   const buttons = [...document.querySelectorAll("[data-quick-checkout]")];
@@ -13,7 +12,7 @@ const STRIPE_QUICK_PAYMENT_LINK = "";
   function currentLang(){
     let value = document.documentElement.lang || "en";
     try {
-      value = localStorage.getItem("loruneiLang")  || value;
+      value = localStorage.getItem("loruneiLang") || value;
     } catch (_) {}
     return value === "ja" ? "ja" : "en";
   }
