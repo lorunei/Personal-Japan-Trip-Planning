@@ -30,8 +30,8 @@ repls=[
  ("infojapaninsider@gmail.com","infolorunei@gmail.com"),
  ("https://formspree.io/f/xeajbpvn","https://formspree.io/f/mjyvgqad"),
  ("xeajbpvn","mjyvgqad"),
- ("https://japaninsider.github.io/japaninsider/","https://lorunei.github.io/Personal-Japan-Trip-Planning/"),
- ("https://japaninsider.github.io/japaninsider","https://lorunei.github.io/Personal-Japan-Trip-Planning"),
+ ("https://japaninsider.github.io/japaninsider/","https://lorunei.github.io/personal-japan-trip-planning/"),
+ ("https://japaninsider.github.io/japaninsider","https://lorunei.github.io/personal-japan-trip-planning"),
  ("assets/css/v57b3.css","assets/css/v1.css"),("assets/js/v57b3.js","assets/js/v1.js"),
  ("assets/css/samples-v57b3.css","assets/css/samples-v1.css"),("assets/js/samples-v57b3.js","assets/js/samples-v1.js"),
  ("v57b3-home","v1-home"),("samples-v57b3","samples-v1"),("v57b3","v1"),
@@ -53,7 +53,7 @@ for old,new in [("FORMSPREE-SETUP-v29.md","FORMSPREE-SETUP.md"),("FORMSPREE-AUTO
 
 (root/"README.md").write_text("""# LORUNEI — Personal Japan Trip Planning
 
-- Live site: https://lorunei.github.io/Personal-Japan-Trip-Planning/
+- Live site: https://lorunei.github.io/personal-japan-trip-planning/
 - Current public build: **v1**
 - Contact: **infolorunei@gmail.com**
 - Form delivery: Formspree endpoint `mjyvgqad`
@@ -87,7 +87,7 @@ The homepage inquiry form and post-payment intake both use this endpoint. Verify
 - Public build: v1
 - Contact: infolorunei@gmail.com
 - Formspree: https://formspree.io/f/mjyvgqad
-- Live URL target: https://lorunei.github.io/Personal-Japan-Trip-Planning/
+- Live URL target: https://lorunei.github.io/personal-japan-trip-planning/
 - Quick Help: $49 / one focused topic / up to 3 closely related questions
 - Japan Answer: $99
 - Japan Research: $299

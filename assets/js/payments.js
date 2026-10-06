@@ -1,7 +1,7 @@
 // LORUNEI payment configuration
 // Live Stripe Payment Link for Quick Help.
 // Stripe post-payment redirect:
-// https://lorunei.github.io/Personal-Japan-Trip-Planning/intake.html
+// https://lorunei.github.io/personal-japan-trip-planning/intake.html
 const STRIPE_QUICK_PAYMENT_LINK = "https://buy.stripe.com/bJe14o1qS6I37uu4pQ9MY00";
 
 (function(){

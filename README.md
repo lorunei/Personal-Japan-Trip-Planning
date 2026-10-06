@@ -1,6 +1,6 @@
 # LORUNEI — Personal Japan Trip Planning
 
-- Live site: https://lorunei.github.io/Personal-Japan-Trip-Planning/
+- Live site: https://lorunei.github.io/personal-japan-trip-planning/
 - Current public build: **v1**
 - Contact: **infolorunei@gmail.com**
 - Form delivery: Formspree endpoint `mjyvgqad`

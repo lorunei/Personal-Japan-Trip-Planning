@@ -14,7 +14,7 @@ Launch with one public Stripe Payment Link for Quick Help. Keep the higher tiers
 1. Create the real Quick Help product and one-time $49 USD Payment Link in Stripe.
 2. Collect customer email in Stripe.
 3. Set the post-payment redirect to the live equivalent of:
-   `https://lorunei.github.io/Personal-Japan-Trip-Planning/thank-you.html?plan=quick`
+   `https://lorunei.github.io/personal-japan-trip-planning/thank-you.html?plan=quick`
 4. Open `assets/js/payments.js` and paste the real URL into `STRIPE_QUICK_PAYMENT_LINK`.
 5. Do not add quotation marks inside the URL and do not use a test URL in production.
 
