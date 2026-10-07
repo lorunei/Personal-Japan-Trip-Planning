@@ -33,3 +33,9 @@ When the configuration is blank, all `[data-quick-checkout]` buttons safely rout
 ## Upgrade credit
 
 If a request is clearly better suited to Japan Answer before deeper individualized work begins, the customer may keep the Quick Help scope or apply the full $49 toward Japan Answer. Collect only the $50 balance after explicit customer approval. Never upgrade or charge automatically.
+
+## URL migration — 2026-10-07
+
+The current live Quick Help checkout link in `assets/js/payments.js` is unchanged. The canonical website URL now uses lowercase.
+
+The Stripe dashboard's actual post-payment redirect was not accessible or modified during the migration. Both legacy `Personal-Japan-Trip-Planning/intake.html` and `Personal-Japan-Trip-Planning/thank-you.html` paths are retained by the compatibility site and forward to the matching lowercase pages, preserving query parameters and fragments. The setup instructions above describe the intended flow, not a verified dashboard setting. See [URL-MIGRATION.md](URL-MIGRATION.md).
