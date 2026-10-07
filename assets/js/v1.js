@@ -1,4 +1,4 @@
-// LORUNEI public site interactions — v1
+// LORUNEI public site interactions — v2
 (() => {
   const root = document.documentElement;
   const nav = document.querySelector('.main-nav');
@@ -58,11 +58,8 @@
     syncInternalLinks(lang);
   }
 
-  let initial = new URLSearchParams(location.search).get('lang');
-  try {
-    initial = initial || localStorage.getItem('loruneiLang') ;
-  } catch (_) {}
-  initial = initial || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en');
+  // Direct visits always start in English. Explicit language links keep navigation localized.
+  const initial = new URLSearchParams(location.search).get('lang') || 'en';
   setLanguage(initial);
 
   document.addEventListener('click', event => {
