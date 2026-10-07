@@ -1,6 +1,6 @@
 # Lowercase public URL migration
 
-Status: prepared; public repository name and Stripe configuration are unchanged.
+Status: migration in progress. The compatibility site is deployed; lowercase project deployment and final verification are next. Stripe configuration is unchanged.
 
 Target repository: lorunei/personal-japan-trip-planning
 Target homepage: https://lorunei.github.io/personal-japan-trip-planning/index.html
@@ -9,9 +9,9 @@ Target homepage: https://lorunei.github.io/personal-japan-trip-planning/index.ht
 
 The live Quick Help Stripe Payment Link remains unchanged. The Stripe dashboard is not accessible in the current session, so its actual after-payment redirect has not been verified or modified.
 
-Proposed compatibility site: a public user-site repository named lorunei.github.io, with the description "LORUNEI URL redirects". Creation is pending explicit user approval: automatic approval review rejected creation because authorization for the URL migration did not explicitly include the additional public repository.
+Compatibility site: public user-site repository lorunei/lorunei.github.io, with the description "LORUNEI URL redirects". The user explicitly approved its addition on 2026-10-07. Its GitHub Pages deployment succeeded at commit 2c85a9b827741b669a394ba85d4a57e5a1334173.
 
-The compatibility site will serve the old Personal-Japan-Trip-Planning paths. Both intake.html (documented in payments.js) and thank-you.html (documented in the older STRIPE-SETUP.md) retain the existing public bilingual pages as a temporary fallback until the matching lowercase destination is ready. Once it is ready, each forwards to the same page, preserving query parameters and fragment.
+The compatibility site serves the old Personal-Japan-Trip-Planning paths. Both intake.html (documented in payments.js) and thank-you.html (documented in the older STRIPE-SETUP.md) retain the existing public bilingual pages as a temporary fallback until the matching lowercase destination is ready. Once it is ready, each forwards to the same page, preserving query parameters and fragment.
 
 This avoids changing prices, the payment link, payment processing, or any Stripe account setting. No credentials, payment records, or customer data are added to the repository.
 
