@@ -1,13 +1,13 @@
 # Lowercase public URL migration
 
-Status: completed on 2026-10-07. The public repository and canonical project URL use lowercase. The compatibility site preserves the old URLs. Stripe configuration is unchanged.
+Status: completed on 2026-10-07. The public repository and canonical project URL use lowercase. The compatibility site preserves the old URLs. Stripe configuration was unchanged during the initial URL migration; see the checkout follow-up below for the current links.
 
 Target repository: lorunei/personal-japan-trip-planning
 Target homepage: https://lorunei.github.io/personal-japan-trip-planning/index.html
 
 ## Preserve existing payment return URLs
 
-The live Quick Help Stripe Payment Link remains unchanged. The Stripe dashboard is not accessible in the current session, so its actual after-payment redirect has not been verified or modified.
+During the initial migration, the live Quick Help Stripe Payment Link was unchanged. The Stripe dashboard was not accessible in that session, so its after-payment redirect was not verified or modified at that stage.
 
 Compatibility site: public user-site repository lorunei/lorunei.github.io, with the description "LORUNEI URL redirects". The user explicitly approved its addition on 2026-10-07. Its GitHub Pages deployment succeeded at commit 2c85a9b827741b669a394ba85d4a57e5a1334173.
 
@@ -35,3 +35,9 @@ GitHub project-site URLs are not automatically redirected on a repository rename
 - The English name link on the Japanese homepage opened the Japanese profile. Switching to English updated profile content and Home/inquiry/history links to lang=en.
 - The existing Quick Help checkout link and $49 price are unchanged.
 - The Stripe dashboard redirect setting remains unverified. No Stripe setting, checkout transaction or customer submission was made during this migration.
+
+## Checkout follow-up — 2026-10-07
+
+Stripe is now connected. Japan Answer ($99) and Japan Research ($299) have live one-time links. After the customer reported a pre-checkout error for Quick Help, a fresh link was created using its existing $49 price. All three current public purchase links return to the lowercase thank-you.html page with the matching plan query. See [STRIPE-SETUP.md](STRIPE-SETUP.md) for the current configuration.
+
+The old Quick Help link and the compatibility site remain available for previously shared links. Stripe link identifiers themselves are case-sensitive and must be preserved exactly.
