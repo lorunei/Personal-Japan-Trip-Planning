@@ -11,6 +11,10 @@ const STRIPE_PAYMENT_LINKS = Object.freeze({
 (function () {
   document.querySelectorAll("[data-checkout-plan]").forEach(button => {
     const link = STRIPE_PAYMENT_LINKS[button.dataset.checkoutPlan];
-    if (link) button.href = link;
+    if (link) {
+      button.href = link;
+      button.target = "_blank";
+      button.rel = "noopener noreferrer";
+    }
   });
 })();
